@@ -1,0 +1,78 @@
+body {
+    margin: 0;
+    font-family: "Courier New", monospace;
+    background: #f4ecd8;
+    color: #2a2a2a;
+}
+
+header {
+    background: #3c3c3c;
+    color: #f7f3d6;
+    padding: 40px 20px;
+    text-align: center;
+    border-bottom: 6px double #e6d8a5;
+}
+
+header h1 {
+    letter-spacing: 4px;
+    font-size: 3rem;
+}
+
+.tagline {
+    font-style: italic;
+    color: #dcd2a3;
+}
+
+nav {
+    background: #e6d8a5;
+    padding: 12px;
+    text-align: center;
+    border-bottom: 3px solid #b8a473;
+}
+
+nav a {
+    margin: 0 20px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #3c3c3c;
+    font-size: 1.1rem;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 25px;
+}
+
+.panel {
+    background: #fffdf4;
+    border: 2px solid #d2c7a2;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 6px;
+    box-shadow: 0px 0px 8px rgba(0,0,0,0.1);
+}
+
+.panel h2 {
+    font-size: 1.8rem;
+    color: #3b2f1a;
+    border-bottom: 2px dashed #bba67d;
+    padding-bottom: 8px;
+}
+
+.note {
+    background: #f6f0dc;
+    border-left: 6px solid #b8a473;
+    padding: 10px;
+    margin-top: 15px;
+    font-style: italic;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #3c3c3c;
+    color: #f7f3d6;
+    margin-top: 40px;
+    border-top: 6px double #e6d8a5;
+}
