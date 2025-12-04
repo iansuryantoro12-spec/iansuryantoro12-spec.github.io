@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guts & Blackpowder Encyclopedia</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use Inter font and dark theme configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'gb-dark': '#0f0f0f',
+                        'gb-red': '#cc3333',
+                        'gb-gold': '#d4af37',
+                        'gb-gray': '#555555',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        // A serif font for a historical/military feel
+                        serif: ['Georgia', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for a darker aesthetic */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cc3333; /* Dark Red */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1f1f1f; /* Very Dark Gray */
+        }
+        
+        .section-title {
+            font-family: 'serif';
+            letter-spacing: 0.1em;
+        }
+
+        /* Image placeholder style for the dark theme */
+        .placeholder-image {
+            background-color: #1a1a1a;
+            border: 1px solid #cc3333;
+            box-shadow: 0 0 10px rgba(204, 51, 51, 0.4);
+            transition: transform 0.2s;
+        }
+        .placeholder-image:hover {
+            transform: scale(1.02);
+        }
+
+        /* Style for actual images inside the card */
+        .card-image {
+            object-fit: cover; /* Ensures the image covers the area without distorting */
+        }
+
+    </style>
+</head>
+<body class="bg-gb-dark text-gray-200 min-h-screen font-sans">
+
+    <!-- Header / Navigation Bar -->
+    <header class="bg-black/80 shadow-lg sticky top-0 z-10 border-b border-gb-red/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <h1 class="text-3xl font-serif font-bold text-gb-gold tracking-widest">
+                G&B Archive
+            </h1>
+            <nav class="space-x-4 hidden md:flex">
+                <a href="#zombies" class="text-gray-300 hover:text-gb-red transition duration-300">Zombies</a>
+                <a href="#classes" class="text-gray-300 hover:text-gb-red transition duration-300">Classes</a>
+                <a href="#weapons" class="text-gray-300 hover:text-gb-red transition duration-300">Weapons</a>
+                <a href="#maps" class="text-gray-300 hover:text-gb-red transition duration-300">Maps</a>
+            </nav>
+            <!-- Mobile Menu Button (Placeholder) -->
+            <button class="md:hidden text-gray-300 hover:text-gb-red focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Hero Section -->
+        <section class="text-center mb-16 p-8 rounded-xl bg-black/50 border border-gb-red/40 shadow-2xl shadow-gb-red/20">
+            <h2 class="text-6xl font-serif font-extrabold mb-4 text-gb-red section-title">
+                THE SCOURGE OF THE 18TH CENTURY
+            </h2>
+            <p class="text-xl text-gray-400 max-w-3xl mx-auto mb-4">
+                An archival repository detailing the infected types, military classes, available armaments, and tactical maps vital for surviving the Blackpowder blight.
+            </p>
+            <p class="text-sm text-gb-gold/70 italic">
+                (Based on the popular Roblox experience: Guts and Blackpowder)
+            </p>
+        </section>
+
+        <!-- ZOMBIES Section - EXPANDED AND CORRECTED -->
+        <section id="zombies" class="mb-16">
+            <h2 class="text-4xl font-serif section-title font-bold text-gb-gold border-b-2 border-gb-red pb-3 mb-8">
+                THE INFECTED HORDE
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+                
+                <!-- Zombie Card 1: The Throng (New addition for completeness) -->
+                <div class="p-4 bg-gb-dark rounded-lg shadow-xl border border-gb-gray/50 hover:border-gb-red transition duration-300">
+                    <div class="w-full h-32 mb-4 rounded-md overflow-hidden placeholder-image flex items-center justify-center">
+                        <span class="text-gb-gray text-center text-sm"><img src="ZapperRender.webp" alt=""></span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gb-red mb-2">The Zapper (slow heavy)</h3>
+                    <p class="text-sm text-gray-400">The standard, slow-moving infected. but they are dangerous in large groups. Focus headshots for effective crowd management.</p>
+                </div>
+
+                <!-- Zombie Card 2: Cuirassier (NOW USING THE CORRECT PLACEHOLDER DIV) -->
+                <div class="p-4 bg-gb-dark rounded-lg shadow-xl border border-gb-gray/50 hover:border-gb-red transition duration-300">
+                    <div class="w-full h-32 mb-4 rounded-md overflow-hidden placeholder-image flex items-center justify-center">
+                        <span class="text-gb-gray text-center text-sm">Image: Cuirassier</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gb-red mb-2">Cuirassier (Heavy)</h3>
+                    <p class="text-sm text-gray-400">This heavily armored infected is slow but can perform a devastating charge. If you are hit by the charge, it will knock you back and momentarily immobilize you, requiring aid from an ally.</p>
+                </div>
+                
+                <!-- Zombie Card 3: The Runner (Refined Description) -->
+                <div class="p-4 bg-gb-dark rounded-lg shadow-xl border border-gb-gray/50 hover:border-gb-red transition duration-300">
+                    <div class="placeholder-image w-full h-32 mb-4 flex items-center justify-center rounded-md">
+                        <span class="text-gb-gray text-center text-sm">Image: Runner</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gb-red mb-2">The Runner (Swift)</h3>
+                    <p class="text-sm text-gray-400">Extremely fast and aggressive. Requires rapid and precise suppression fire at a distance. Missing a close-range melee attack against a Runner is highly dangerous.</p>
+                </div>
+                
+                <!-- Zombie Card 4: The Brute (Corrected Name, Kept description structure) -->
+                <div class="p-4 bg-gb-dark rounded-lg shadow-xl border border-gb-gray/50 hover:border-gb-red transition duration-300">
+                    <div class="placeholder-image w-full h-32 mb-4 flex items-center justify-center rounded-md">
+                        <span class="text-gb-gray text-center text-sm">Image: Igniter</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gb-red mb-2">Igniter</h3>
+                    <p class="text-sm text-gray-400">a .</p> The Igniter is a heavily burnt, shambling zombie with a distinctive yellow glow from its lantern. When an Igniter is within 100 studs of a player, it will throw its lantern, which explodes on impact to create a burning area that damages and debuffs players
+                </div>
+                
+                <!-- Zombie Card 5: The Screamer -->
+                <div class="p-4 bg-gb-dark rounded-lg shadow-xl border border-gb-gray/50 hover:border-gb-red transition duration-300">
+                    <div class="placeholder-image w-full h-32 mb-4 flex items-center justify-center rounded-md">
+                        <span class="text-gb-gray text-center text-sm">Image: Bomber</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gb-red mb-2">Bomber</h3>
+                    <p class="text-sm text-gray-400">the Bomber is a destructive zombie that carries a barrel and a torch, stopping near a target before lighting its fuse.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CLASSES Section - EXPANDED (Now including Sapper) -->
+        <section id="classes" class="mb-16">
+            <h2 class="text-4xl font-serif section-title font-bold text-gb-gold border-b-2 border-gb-red pb-3 mb-8">
+                MILITARY SPECIALIZATIONS
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
+                
+                <!-- Class Card 1: Line Infantry -->
+                <div class="p-6 bg-black/50 rounded-lg shadow-xl border border-gb-gold/50">
+                    <h3 class="text-2xl font-serif font-bold text-gb-gold mb-3">Line Infantry</h3>
+                    <p class="text-gray-400 mb-4">The backbone of the defense. Focuses on steady, disciplined fire, bayonet defense,pikes, and holding formation against overwhelming odds.</p>
+                    <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
+                        <li>**Primary Weapon:** Smoothbore Musket,Sabre,Pike</li>
+                        <li>**Key Skill:** has a high amount of weapons to choose from</li>
+                        <li>**Role:** Sustained damage and crowd control.</li>
+                    </ul>
+                </div>
+                
+                <!-- Class Card 2: Field Surgeon -->
+                <div class="p-6 bg-black/50 rounded-lg shadow-xl border border-gb-gold/50">
+                    <h3 class="text-2xl font-serif font-bold text-gb-gold mb-3">Field Surgeon</h3>
+                    <p class="text-gray-400 mb-4">Crucial for morale and survival. Equipped to rapidly treat wounds. Their presence keeps the fight going.</p>
+                    <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
+                        <li>**Primary Weapon:** Sabre</li>
+                        <li>**Key Skill:** Field Dressing (Rapidly heal a wounded comrade)</li>
+                        <li>**Role:** Essential support and medical aid.</li>
+                    </ul>
+                </div>
+                
+                <!-- Class Card 3: Grenadier -->
+                <div class="p-6 bg-black/50 rounded-lg shadow-xl border border-gb-gold/50">
+                    <h3 class="text-2xl font-serif font-bold text-gb-gold mb-3">Seamen</h3>
+                    <p class="text-gray-400 mb-4">Specialist in heavy arms and explosives. Essential for breaking up large enemy formations and destroying heavily armored targets like the Cuirassier.</p>
+                    <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
+                        <li>**Primary Weapon:** Sabre and Blunderbuss</li>
+                        <li>**Key Skill:** being able to use a large variety Gun for large crowd control</li>
+                        <li>**Role:** Anti-armor and crowd control.</li>
+                    </ul>
+                </div>
+
+                <!-- Class Card 4: The Officer -->
+                <div class="p-6 bg-black/50 rounded-lg shadow-xl border border-gb-gold/50">
+                    <h3 class="text-2xl font-serif font-bold text-gb-gold mb-3">The Officer</h3>
+                    <p class="text-gray-400 mb-4">The leader on the battlefield. Officers provide crucial tactical guidance and command, boosting the effectiveness and resilience of nearby troops.</p>
+                    <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
+                        <li>**Primary Weapon:** Sabre and Pistol</li>
+                        <li>**Key Skill:** Inspire Troops (Buffs damage allies with a charge that boost the speed and damge of allys around him)</li>
+                        <li>**Role:** Leadership.</li>
+                    </ul>
+                </div>
+
+                <!-- Class Card 5: Sapper (NEW ADDITION) -->
+                <div class="p-6 bg-black/50 rounded-lg shadow-xl border border-gb-gold/50">
+                    <h3 class="text-2xl font-serif font-bold text-gb-gold mb-3">The Sapper</h3>
+                    <p class="text-gray-400 mb-4">The fortifications expert. The Sapper specializes in building defenses like barricades and Spikes to control the flow of the infected, and to protect allys from them aswell.</p>
+                    <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
+                        <li>**Primary Tool/Weapon:** Hammer/Claw Hammer.Large Axe</li>
+                        <li>**Key Skill:** Fortification (Constructs and repairs defenses)</li>
+                        <li>**Role:** Defense construction and obstacle creation.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- WEAPONS Section -->
+        <section id="weapons" class="mb-16">
+            <h2 class="text-4xl font-serif section-title font-bold text-gb-gold border-b-2 border-gb-red pb-3 mb-8">
+                ARMAMENTS OF THE ERA
+            </h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gb-red/50 bg-black/70 rounded-lg shadow-xl">
+                    <thead class="bg-black">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gb-gold uppercase tracking-wider">Weapon</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gb-gold uppercase tracking-wider">Type</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gb-gold uppercase tracking-wider">Reload Speed</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gb-gold uppercase tracking-wider">Effective Range</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gb-gray/30">
+                        <tr class="hover:bg-gb-dark/50 transition duration-150">
+                            <td class="px-6 py-4 whitespace-nowrap font-bold text-gb-gold">Musket</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-300">short of like a Rifle (Single Shot)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gb-red">Slow</td>
+                            <td class="px-6 py-4 whitespace-nowrap">Medium-Long</td>
+                        </tr>
+                        <tr class="hover:bg-gb-dark/50 transition duration-150">
+                            <td class="px-6 py-4 whitespace-nowrap font-bold text-gb-gold">Flintlock Pistol</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-300">Handgun (Single Shot)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gb-red">Medium</td>
+                            <td class="px-6 py-4 whitespace-nowrap">Close</td>
+                        </tr>
+                        <tr class="hover:bg-gb-dark/50 transition duration-150">
+                            <td class="px-6 py-4 whitespace-nowrap font-bold text-gb-gold">Blunderbuss</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-300">Shotgun (Area Effect)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gb-red">Medium</td>
+                            <td class="px-6 py-4 whitespace-nowrap">Close to medium range</td>
+                        </tr>
+                        <tr class="hover:bg-gb-dark/50 transition duration-150">
+                            <td class="px-6 py-4 whitespace-nowrap font-bold text-gb-gold">Heavy Sabre</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-300">Melee</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-green-500">Instant</td>
+                            <td class="px-6 py-4 whitespace-nowrap">Melee</td>
+                        </tr>
+                        <tr class="hover:bg-gb-dark/50 transition duration-150">
+                            <td class="px-6 py-4 whitespace-nowrap font-bold text-gb-gold">Hand Mortar</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-300">Launcher (Explosive)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gb-red">Slow</td>
+                            <td class="px-6 py-4 whitespace-nowrap">Close (Area Effect)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- MAPS Section -->
+        <section id="maps" class="mb-16">
+            <h2 class="text-4xl font-serif section-title font-bold text-gb-gold border-b-2 border-gb-red pb-3 mb-8">
+                TACTICAL ENGAGEMENT ZONES
+            </h2>
+            <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+                <!-- Map Card 1: Abandoned Fort (Placeholder maintained) -->
+                <div class="p-4 bg-black/50 rounded-lg shadow-xl border border-gb-red/50">
+                    <div class="placeholder-image w-full h-40 mb-4 flex items-center justify-center rounded-md">
+                        <span class="text-gb-gray text-center text-sm">Image: London</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gb-gold mb-2">london</h3>
+                    <p class="text-sm text-gray-400">a post-apocalyptic city ravaged by the "Blight" (zombie outbreak), forcing survivors to flee the ruins while battling undead hordes and other threats. Players must navigate through a city in chaos, where iconic landmarks like Big Ben and St. Paul's Cathedral are in ruins.</p>
+                    <span class="inline-block mt-2 text-xs font-semibold px-3 py-1 bg-gb-red/30 text-gb-red rounded-full">Defense Focus</span>
+                </div>
+                <!-- Map Card 2: Rural Village (Placeholder maintained) -->
+                <div class="p-4 bg-black/50 rounded-lg shadow-xl border border-gb-red/50">
+                    <div class="placeholder-image w-full h-40 mb-4 flex items-center justify-center rounded-md">
+                        <span class="text-gb-gray text-center text-sm">Image: Leipzig</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gb-gold mb-2">Leipzig</h3>
+                    <p class="text-sm text-gray-400">Players must fight through the city, pushing a wagon to clear debris, and then enter a final holdout before a gate can be blown open by Jacob.</p>
+                    <span class="inline-block mt-2 text-xs font-semibold px-3 py-1 bg-gb-gold/30 text-gb-gold rounded-full">CQC/Escape Focus</span>
+                </div>
+                <!-- Map Card 3: Coastal Battery (Placeholder maintained) -->
+                <div class="p-4 bg-black/50 rounded-lg shadow-xl border border-gb-red/50">
+                    <div class="placeholder-image w-full h-40 mb-4 flex items-center justify-center rounded-md">
+                        <span class="text-gb-gray text-center text-sm">Image: Hougoumont</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gb-gold mb-2">Hougoumont</h3>
+                    <p class="text-sm text-gray-400">a survival-based map, typically played in Endless Mode, where players must defend the farmstead from hordes of zombies.</p>
+                    <span class="inline-block mt-2 text-xs font-semibold px-3 py-1 bg-gb-red/30 text-gb-red rounded-full">Long-Range Focus</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- MINI-GAME Section (NEW ADDITION) -->
+        <section id="minigame" class="mt-16 text-center">
+            <h2 class="text-4xl font-serif section-title font-bold text-gb-gold border-b-2 border-gb-red pb-3 mb-8">
+                VOLLEY FIRE REACTION DRILL
+            </h2>
+            <div id="game-container" class="max-w-xl mx-auto p-8 rounded-xl bg-black/50 border border-gb-gold/40 shadow-2xl shadow-gb-gold/20">
+                <p id="game-status" class="text-xl mb-6 text-gray-300 font-semibold h-8">
+                    Click "Start Drill" to begin the reaction test!
+                </p>
+                
+                <button id="game-button" class="w-full py-4 px-6 text-2xl font-bold rounded-lg shadow-lg 
+                    transition duration-200 ease-in-out bg-gb-red text-white hover:bg-gb-red/80 
+                    focus:outline-none focus:ring-4 focus:ring-gb-red/50"
+                    onclick="startGame()">
+                    Start Drill
+                </button>
+                
+                <p id="game-result" class="mt-6 text-2xl font-bold text-gb-gold">
+                    Your fastest time: --- ms
+                </p>
+                <p id="game-best" class="mt-2 text-md text-gray-400">
+                    Best time so far: None
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black/80 border-t border-gb-red/50 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-gray-500">
+            &copy; 2025 Guts & Blackpowder Archive. All tactical data is considered classified.
+        </div>
+    </footer>
+
+    <!-- Game Logic Script -->
+    <script>
+        let gameState = 'ready'; // 'ready', 'awaiting', 'fire'
+        let startTime = 0;
+        let timeoutId = null;
+        let bestTime = Infinity;
+
+        const button = document.getElementById('game-button');
+        const statusText = document.getElementById('game-status');
+        const resultText = document.getElementById('game-result');
+        const bestTimeText = document.getElementById('game-best');
+        const gameContainer = document.getElementById('game-container');
+
+        // Initial setup for the button click handler
+        button.onclick = startGame;
+
+        function updateUI(newGameState, statusMessage, buttonText, containerClass, buttonClass) {
+            gameState = newGameState;
+            statusText.textContent = statusMessage;
+            button.textContent = buttonText;
+            // The class string below controls the look of the container (border color, shadow, etc.)
+            gameContainer.className = 'max-w-xl mx-auto p-8 rounded-xl shadow-2xl transition duration-500 ' + containerClass;
+            // The class string below controls the look of the button (color, hover, focus)
+            button.className = 'w-full py-4 px-6 text-2xl font-bold rounded-lg shadow-lg transition duration-200 ease-in-out focus:outline-none focus:ring-4 ' + buttonClass;
+        }
+
+        function startGame() {
+            if (gameState === 'awaiting' || gameState === 'fire') {
+                // Ignore clicks if the game is already running (unless it's a false start)
+                return;
+            }
+
+            // Awaiting state: Dark gray button, gold theme
+            updateUI('awaiting', 'Awaiting Command...', 'Wait!', 'bg-black/50 border border-gb-gold/40 shadow-gb-gold/20', 'bg-gray-700 text-gray-400 cursor-not-allowed focus:ring-gray-600/50');
+            
+            // Re-define button click handler to check for false start during the delay
+            button.onclick = () => {
+                if (gameState === 'awaiting') {
+                    // False start handling
+                    clearTimeout(timeoutId);
+                    updateUI('ready', 'FALSE START! (-1000ms penalty). Click to restart.', 'Start Drill', 'bg-black/50 border border-gb-red/40 shadow-gb-red/20', 'bg-gb-red text-white hover:bg-gb-red/80 focus:ring-gb-red/50');
+                    resultText.textContent = 'False Start: +1000 ms penalty';
+                    button.onclick = startGame;
+                } else if (gameState === 'fire') {
+                    stopGame();
+                }
+            };
+
+            // Random delay between 1 second and 4 seconds (1000ms to 4000ms)
+            const delay = Math.random() * 3000 + 1000; 
+            
+            timeoutId = setTimeout(() => {
+                // Transition to 'fire' state
+                startTime = performance.now();
+                // Fire state: Gold button, red theme, pulsing animation
+                updateUI('fire', 'FIRE! NOW!', 'FIRE!', 'bg-black/50 border border-gb-red/80 shadow-gb-red/80', 'bg-gb-gold text-gb-dark animate-pulse hover:bg-gb-gold/80 focus:ring-gb-gold/50');
+                
+                // Set the handler for actual timing
+                button.onclick = stopGame;
+
+            }, delay);
+        }
+
+        function stopGame() {
+            if (gameState !== 'fire') return; // Only process if the FIRE command was given
+
+            const endTime = performance.now();
+            const reactionTime = Math.floor(endTime - startTime);
+
+            let message = `Reaction Time: ${reactionTime} ms. Click to try again!`;
+            if (reactionTime < bestTime) {
+                bestTime = reactionTime;
+                bestTimeText.textContent = `New Best Time: ${bestTime} ms!`;
+                message = `New Record! Reaction Time: ${reactionTime} ms. Click to try again!`;
+            } else {
+                 bestTimeText.textContent = `Best time so far: ${bestTime === Infinity ? 'None' : bestTime + ' ms'}`;
+            }
+
+            // Ready state: Red button, gold theme (reset)
+            updateUI('ready', message, 'Start Drill', 'bg-black/50 border border-gb-gold/40 shadow-gb-gold/20', 'bg-gb-red text-white hover:bg-gb-red/80 focus:ring-gb-red/50');
+            resultText.textContent = `Your fastest time: ${bestTime} ms`;
+            
+            // Reset click handler
+            button.onclick = startGame;
+        }
+
+        // Initialize best time text display on page load
+        window.onload = () => {
+             bestTimeText.textContent = `Best time so far: None`;
+        }
+    </script>
+</body>
+</html>
