@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indie Game Hub - Doom Edition</title>
+    <title>Indie Game Hub: Ultimate Edition</title>
     <style>
         :root {
             --bg: #0a0a0c;
@@ -11,13 +11,14 @@
             --primary: #4CAF50;
             --accent: #0dc2ff;
             --doom-red: #ff4757;
+            --gold: #ffd700;
             --text: #ffffff;
         }
 
         body {
             background: var(--bg);
             color: var(--text);
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -26,6 +27,7 @@
             overflow: hidden;
         }
 
+        /* --- HELLO WORLD SPLASH --- */
         #welcome-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -41,21 +43,23 @@
             font-size: 4rem;
             color: var(--accent);
             text-transform: uppercase;
-            letter-spacing: 10px;
+            letter-spacing: 12px;
             animation: pulse 2s infinite;
         }
         @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; text-shadow: 0 0 20px var(--accent); }
+            0%, 100% { opacity: 0.6; text-shadow: 0 0 10px var(--accent); }
+            50% { opacity: 1; text-shadow: 0 0 30px var(--accent); }
         }
 
+        /* --- UI & HUB --- */
         #ui {
-            margin: 30px 20px 10px;
+            margin: 20px;
             text-align: center;
             background: var(--surface);
             padding: 15px 30px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 5;
         }
 
         .btn-group { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
@@ -68,18 +72,21 @@
             border: 2px solid var(--accent);
             color: var(--accent);
             border-radius: 8px;
-            transition: 0.3s;
+            transition: 0.2s;
         }
+        .btn:hover { background: rgba(13, 194, 255, 0.1); }
         .btn.active { background: var(--accent); color: var(--bg); }
+        .btn-eco { border-color: var(--primary); color: var(--primary); }
+        .btn-eco.active { background: var(--primary); color: #fff; }
         .btn-doom { border-color: var(--doom-red); color: var(--doom-red); }
         .btn-doom.active { background: var(--doom-red); color: #fff; }
 
+        /* --- GAME ENGINE AREA --- */
         .game-wrapper { position: relative; margin-top: 10px; }
-        canvas { border-radius: 5px; background-color: #000; box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
+        canvas { border-radius: 8px; background-color: #000; box-shadow: 0 15px 45px rgba(0,0,0,0.7); }
         .game-container { display: none; flex-direction: column; align-items: center; }
         .game-container.active { display: flex; }
-        .score-board { font-size: 20px; font-weight: bold; margin-bottom: 10px; }
-        .controls { margin-top: 10px; color: #aaa; font-size: 12px; background: var(--surface); padding: 5px 15px; border-radius: 20px; }
+        .score-board { font-size: 22px; font-weight: bold; margin-bottom: 10px; font-variant-numeric: tabular-nums; }
 
         #game-over {
             position: absolute;
@@ -89,32 +96,34 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 10;
+            z-index: 20;
+            border-radius: 8px;
         }
         #game-over.active { display: flex; }
+        #game-over h2 { color: var(--doom-red); font-size: 2.5rem; margin-bottom: 5px; }
     </style>
 </head>
 <body>
 
     <div id="welcome-screen">
         <h1>Hello World</h1>
-        <button class="btn active" onclick="dismissWelcome()">ENTER HUB</button>
+        <button class="btn active" style="padding: 15px 30px;" onclick="dismissWelcome()">INITIALIZE HUB</button>
     </div>
 
     <div id="ui">
         <div class="btn-group">
             <button class="btn active" id="btn-tetris" onclick="switchGame(this, 'tetris')">Tetris</button>
             <button class="btn" id="btn-snake" onclick="switchGame(this, 'snake')">Snake</button>
-            <button class="btn" style="border-color: var(--primary); color: var(--primary);" onclick="switchGame(this, 'eco')">Eco Catch</button>
-            <button class="btn btn-doom" onclick="switchGame(this, 'doom')">Doom</button>
+            <button class="btn btn-eco" onclick="switchGame(this, 'eco')">Eco Catch+</button>
+            <button class="btn btn-doom" onclick="switchGame(this, 'doom')">Mini Doom</button>
         </div>
     </div>
 
     <div class="game-wrapper">
         <div id="game-over">
-            <h2 style="color:red">WASTED</h2>
-            <div id="go-score">Score: 0</div>
-            <button class="btn active" style="margin-top:20px" onclick="restartCurrentGame()">Retry</button>
+            <h2>WASTED</h2>
+            <div id="go-score" style="font-size: 1.2rem; margin-bottom: 20px;">Score: 0</div>
+            <button class="btn active" onclick="restartCurrentGame()">RETRY SESSION</button>
         </div>
 
         <div id="tetris-container" class="game-container active">
@@ -128,14 +137,15 @@
         </div>
 
         <div id="eco-container" class="game-container">
-            <div class="score-board" id="eco-score">Cleaned: 0 | Missed: 0/3</div>
-            <canvas id="eco" width="400" height="400" style="background-color: #1a3622;"></canvas>
+            <div class="score-board" id="eco-score">Points: 0 | Health: ❤️❤️❤️</div>
+            <canvas id="eco" width="440" height="400"></canvas>
+            <div style="color: #666; font-size: 12px; margin-top: 8px;">Gold = Super Bonus | Red = Toxic (Avoid!)</div>
         </div>
 
         <div id="doom-container" class="game-container">
             <div class="score-board" id="doom-score">Kills: 0</div>
             <canvas id="doom" width="480" height="320"></canvas>
-            <div class="controls">WASD to Move | SPACE to Shoot</div>
+            <div style="color: #666; font-size: 12px; margin-top: 8px;">WASD: Move | SPACE: Shoot</div>
         </div>
     </div>
 
@@ -145,33 +155,38 @@
         let loops = { tetris: null, snake: null, eco: null, doom: null };
         let keys = {};
 
-        window.addEventListener('keydown', e => keys[e.code] = true);
-        window.addEventListener('keyup', e => keys[e.code] = false);
+        window.addEventListener('keydown', e => { keys[e.code] = true; });
+        window.addEventListener('keyup', e => { keys[e.code] = false; });
 
         function dismissWelcome() {
             document.getElementById('welcome-screen').style.opacity = '0';
             setTimeout(() => {
                 document.getElementById('welcome-screen').style.display = 'none';
-                resetTetris();
+                switchGame(document.getElementById('btn-tetris'), 'tetris');
             }, 800);
         }
 
-        function switchGame(btnElement, game) {
+        function switchGame(btn, game) {
+            // Cleanup
             cancelAnimationFrame(loops.tetris);
             clearInterval(loops.snake);
             cancelAnimationFrame(loops.eco);
             cancelAnimationFrame(loops.doom);
-            hideGameOver();
+            keys = {}; 
+            
             document.querySelectorAll('.game-container').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.btn').forEach(el => el.classList.remove('active'));
+            document.getElementById('game-over').classList.remove('active');
+            
             document.getElementById(game + '-container').classList.add('active');
-            btnElement.classList.add('active');
+            btn.classList.add('active');
             currentGame = game;
+            isGameOver = false;
 
             if(game === 'tetris') resetTetris();
-            else if(game === 'snake') resetSnake();
-            else if(game === 'eco') resetEco();
-            else if(game === 'doom') resetDoom();
+            if(game === 'snake') resetSnake();
+            if(game === 'eco') resetEco();
+            if(game === 'doom') resetDoom();
         }
 
         function triggerGameOver(score) {
@@ -180,74 +195,83 @@
             document.getElementById('game-over').classList.add('active');
         }
 
-        function hideGameOver() {
-            isGameOver = false;
-            document.getElementById('game-over').classList.remove('active');
-        }
-
         function restartCurrentGame() {
-            hideGameOver();
-            if(currentGame === 'tetris') resetTetris();
-            else if(currentGame === 'snake') resetSnake();
-            else if(currentGame === 'eco') resetEco();
-            else if(currentGame === 'doom') resetDoom();
+            switchGame(document.querySelector(`.btn[onclick*="${currentGame}"]`), currentGame);
         }
 
         // ==========================================
-        //  TETRIS (RESTORED)
+        //  TETRIS LOGIC (FIXED)
         // ==========================================
         const tCanvas = document.getElementById('tetris');
         const tCtx = tCanvas.getContext('2d');
-        let tScore = 0, tArena = [], tPlayer = {};
+        let tScore, tArena, tPlayer, tDropCounter, tLastTime;
 
         function resetTetris() {
-            tArena = Array.from({length: 20}, () => Array(12).fill(0));
-            tScore = 0; tPlayer = {pos: {x: 5, y: 0}, matrix: createPiece('T')};
+            tScore = 0; tArena = Array.from({length: 20}, () => Array(12).fill(0));
+            tPlayer = {pos: {x: 4, y: 0}, matrix: [[0,1,0],[1,1,1],[0,0,0]]};
+            tDropCounter = 0; tLastTime = 0;
             updateTetris();
-        }
-
-        function createPiece(t) {
-            if (t === 'T') return [[0,1,0],[1,1,1],[0,0,0]];
-            if (t === 'O') return [[2,2],[2,2]];
-            if (t === 'L') return [[0,0,3],[3,3,3],[0,0,0]];
-            return [[4,4,4,4]];
         }
 
         function updateTetris(time = 0) {
             if(currentGame !== 'tetris' || isGameOver) return;
+            const deltaTime = time - tLastTime; tLastTime = time;
+            tDropCounter += deltaTime;
+            if(tDropCounter > 1000) { 
+                tPlayer.pos.y++; 
+                if(tCollide()) { tPlayer.pos.y--; tMerge(); tPlayerReset(); }
+                tDropCounter = 0; 
+            }
+            // Draw
             tCtx.fillStyle = '#000'; tCtx.fillRect(0,0,240,400);
-            tArena.forEach((row, y) => row.forEach((val, x) => {
-                if(val) { tCtx.fillStyle = '#0dc2ff'; tCtx.fillRect(x*20, y*20, 19, 19); }
-            }));
-            tPlayer.matrix.forEach((row, y) => row.forEach((val, x) => {
-                if(val) { tCtx.fillStyle = '#ff4757'; tCtx.fillRect((tPlayer.pos.x + x)*20, (tPlayer.pos.y + y)*20, 19, 19); }
-            }));
+            tArena.forEach((row, y) => row.forEach((v, x) => { if(v) { tCtx.fillStyle = '#0dc2ff'; tCtx.fillRect(x*20, y*20, 19, 19); }}));
+            tPlayer.matrix.forEach((row, y) => row.forEach((v, x) => { if(v) { tCtx.fillStyle = '#ff4757'; tCtx.fillRect((tPlayer.pos.x+x)*20, (tPlayer.pos.y+y)*20, 19, 19); }}));
+            document.getElementById('tetris-score').innerText = `Score: ${tScore}`;
             loops.tetris = requestAnimationFrame(updateTetris);
+        }
+        function tCollide() {
+            const [m, o] = [tPlayer.matrix, tPlayer.pos];
+            for(let y=0; y<m.length; y++) for(let x=0; x<m[y].length; x++)
+                if(m[y][x] !== 0 && (tArena[y+o.y] && tArena[y+o.y][x+o.x]) !== 0) return true;
+            return false;
+        }
+        function tMerge() {
+            tPlayer.matrix.forEach((row, y) => row.forEach((v, x) => { if(v) tArena[y+tPlayer.pos.y][x+tPlayer.pos.x] = v; }));
+            tArena.forEach((row, y) => { if(row.every(v => v !== 0)) { tArena.splice(y,1); tArena.unshift(new Array(12).fill(0)); tScore += 100; }});
+        }
+        function tPlayerReset() {
+            tPlayer.pos = {x: 4, y: 0};
+            if(tCollide()) triggerGameOver(tScore);
         }
 
         // ==========================================
-        //  SNAKE (RESTORED)
+        //  SNAKE LOGIC (FIXED)
         // ==========================================
         const sCanvas = document.getElementById('snake');
         const sCtx = sCanvas.getContext('2d');
-        let snake, food, dx, dy, sScore;
+        let snake, food, sDir, sScore;
 
         function resetSnake() {
-            snake = [{x: 200, y: 200}, {x: 190, y: 200}];
-            dx = 10; dy = 0; sScore = 0;
+            snake = [{x: 200, y: 200}]; sDir = {x: 10, y: 0}; sScore = 0;
             food = {x: 100, y: 100};
-            if(loops.snake) clearInterval(loops.snake);
-            loops.snake = setInterval(mainSnake, 100);
+            loops.snake = setInterval(updateSnake, 100);
         }
 
-        function mainSnake() {
+        function updateSnake() {
             if(currentGame !== 'snake' || isGameOver) return;
-            let head = {x: snake[0].x + dx, y: snake[0].y + dy};
-            if(head.x < 0 || head.x >= 400 || head.y < 0 || head.y >= 400) return triggerGameOver(sScore);
+            if(keys['ArrowLeft'] && sDir.x === 0) sDir = {x: -10, y: 0};
+            if(keys['ArrowRight'] && sDir.x === 0) sDir = {x: 10, y: 0};
+            if(keys['ArrowUp'] && sDir.y === 0) sDir = {x: 0, y: -10};
+            if(keys['ArrowDown'] && sDir.y === 0) sDir = {x: 0, y: 10};
+
+            const head = {x: snake[0].x + sDir.x, y: snake[0].y + sDir.y};
+            if(head.x < 0 || head.x >= 400 || head.y < 0 || head.y >= 400 || snake.some(p => p.x === head.x && p.y === head.y)) return triggerGameOver(sScore);
+            
             snake.unshift(head);
             if(head.x === food.x && head.y === food.y) {
                 sScore += 10; food = {x: Math.floor(Math.random()*39)*10, y: Math.floor(Math.random()*39)*10};
             } else snake.pop();
+
             sCtx.fillStyle = '#000'; sCtx.fillRect(0,0,400,400);
             sCtx.fillStyle = 'red'; sCtx.fillRect(food.x, food.y, 10, 10);
             sCtx.fillStyle = '#0dc2ff'; snake.forEach(p => sCtx.fillRect(p.x, p.y, 9, 9));
@@ -255,131 +279,153 @@
         }
 
         // ==========================================
-        //  ECO CATCH (RESTORED)
+        //  ECO CATCH+ (MUCH MORE FUN)
         // ==========================================
         const eCanvas = document.getElementById('eco');
         const eCtx = eCanvas.getContext('2d');
-        let ecoX, ecoTrash, ecoScore, ecoMissed;
+        let ePlayer, eItems, eScore, eHealth, eSpawnTimer;
 
         function resetEco() {
-            ecoX = 180; ecoTrash = []; ecoScore = 0; ecoMissed = 0;
+            ePlayer = { x: 200, velX: 0, w: 60 };
+            eItems = []; eScore = 0; eHealth = 3; eSpawnTimer = 0;
             updateEco();
         }
 
         function updateEco() {
             if(currentGame !== 'eco' || isGameOver) return;
-            if(keys['ArrowLeft'] && ecoX > 0) ecoX -= 5;
-            if(keys['ArrowRight'] && ecoX < 350) ecoX += 5;
-            if(Math.random() < 0.02) ecoTrash.push({x: Math.random()*380, y: 0});
-            eCtx.fillStyle = '#1a3622'; eCtx.fillRect(0,0,400,400);
-            eCtx.fillStyle = '#4CAF50'; eCtx.fillRect(ecoX, 370, 50, 20);
-            ecoTrash.forEach((t, i) => {
-                t.y += 3; eCtx.fillStyle = 'brown'; eCtx.fillRect(t.x, t.y, 10, 10);
-                if(t.y > 370 && t.x > ecoX && t.x < ecoX + 50) { ecoTrash.splice(i,1); ecoScore += 10; }
-                else if(t.y > 400) { ecoTrash.splice(i,1); ecoMissed++; }
+
+            // Smooth Physics
+            if(keys['ArrowLeft']) ePlayer.velX -= 1.5;
+            if(keys['ArrowRight']) ePlayer.velX += 1.5;
+            ePlayer.velX *= 0.85; // Friction
+            ePlayer.x += ePlayer.velX;
+            if(ePlayer.x < 0) ePlayer.x = 0;
+            if(ePlayer.x > eCanvas.width - ePlayer.w) ePlayer.x = eCanvas.width - ePlayer.w;
+
+            // Spawning
+            eSpawnTimer++;
+            if(eSpawnTimer > 30) {
+                let type = Math.random() > 0.8 ? (Math.random() > 0.5 ? 'gold' : 'toxic') : 'normal';
+                eItems.push({ x: Math.random()*(eCanvas.width-20), y: -20, type, speed: 3 + Math.random()*3 });
+                eSpawnTimer = 0;
+            }
+
+            eCtx.fillStyle = '#1a2a1a'; eCtx.fillRect(0,0,eCanvas.width, eCanvas.height);
+            
+            // Draw Player (Bin)
+            eCtx.fillStyle = '#4CAF50';
+            eCtx.fillRect(ePlayer.x, 370, ePlayer.w, 20);
+            eCtx.fillStyle = '#2E7D32';
+            eCtx.fillRect(ePlayer.x - 5, 365, ePlayer.w + 10, 5);
+
+            eItems.forEach((item, i) => {
+                item.y += item.speed;
+                if(item.type === 'normal') eCtx.fillStyle = '#8d6e63';
+                else if(item.type === 'gold') eCtx.fillStyle = '#ffd700';
+                else eCtx.fillStyle = '#ff4444';
+                
+                eCtx.beginPath(); eCtx.arc(item.x+10, item.y+10, 8, 0, Math.PI*2); eCtx.fill();
+
+                // Collision
+                if(item.y > 355 && item.x > ePlayer.x - 10 && item.x < ePlayer.x + ePlayer.w) {
+                    if(item.type === 'toxic') eHealth--;
+                    else eScore += (item.type === 'gold' ? 50 : 10);
+                    eItems.splice(i, 1);
+                } else if(item.y > 400) {
+                    if(item.type === 'normal') eScore = Math.max(0, eScore-5);
+                    eItems.splice(i, 1);
+                }
             });
-            document.getElementById('eco-score').innerText = `Cleaned: ${ecoScore} | Missed: ${ecoMissed}/3`;
-            if(ecoMissed >= 3) triggerGameOver(ecoScore);
+
+            let hearts = "❤️".repeat(Math.max(0, eHealth));
+            document.getElementById('eco-score').innerText = `Points: ${eScore} | Health: ${hearts}`;
+            if(eHealth <= 0) triggerGameOver(eScore);
             else loops.eco = requestAnimationFrame(updateEco);
         }
 
         // ==========================================
-        //  DOOM (WITH GUN & ENEMIES)
+        //  MINI DOOM (FIXED RAYCASTER & COMBAT)
         // ==========================================
         const dCanvas = document.getElementById('doom');
         const dCtx = dCanvas.getContext('2d');
-        const worldMap = [
-            [1,1,1,1,1,1,1,1], [1,0,0,0,0,0,0,1], [1,0,1,0,0,1,0,1], [1,0,1,0,0,1,0,1],
-            [1,0,0,0,0,0,0,1], [1,0,1,1,0,1,0,1], [1,0,0,0,0,0,0,1], [1,1,1,1,1,1,1,1]
+        const map = [
+            [1,1,1,1,1,1,1,1],[1,0,0,0,0,0,0,1],[1,0,1,0,0,1,0,1],[1,0,1,0,0,1,0,1],
+            [1,0,0,0,0,0,0,1],[1,0,1,1,0,1,0,1],[1,0,0,0,0,0,0,1],[1,1,1,1,1,1,1,1]
         ];
-        let pX, pY, dirX, dirY, planeX, planeY, doomKills, enemy, recoil = 0;
+        let pX, pY, pDir, pPlane, dKills, dEnemy, dRecoil;
 
         function resetDoom() {
-            pX = 3.5; pY = 3.5; dirX = -1; dirY = 0; planeX = 0; planeY = 0.66;
-            doomKills = 0; recoil = 0;
-            spawnEnemy();
+            pX = 3.5; pY = 3.5; pDir = {x: -1, y: 0}; pPlane = {x: 0, y: 0.66};
+            dKills = 0; dRecoil = 0;
+            spawnDoomEnemy();
             updateDoom();
         }
 
-        function spawnEnemy() {
-            enemy = { x: 1.5 + Math.random()*5, y: 1.5 + Math.random()*5, active: true };
+        function spawnDoomEnemy() {
+            dEnemy = { x: 1.5 + Math.random()*5, y: 1.5 + Math.random()*5 };
         }
 
         function updateDoom() {
             if(currentGame !== 'doom' || isGameOver) return;
-            
-            // Move & Rotate
-            let moveSpeed = 0.05, rotSpeed = 0.04;
-            if(keys['KeyW']) { if(!worldMap[Math.floor(pX+dirX*moveSpeed)][Math.floor(pY)]) pX += dirX*moveSpeed; if(!worldMap[Math.floor(pX)][Math.floor(pY+dirY*moveSpeed)]) pY += dirY*moveSpeed; }
-            if(keys['KeyS']) { if(!worldMap[Math.floor(pX-dirX*moveSpeed)][Math.floor(pY)]) pX -= dirX*moveSpeed; if(!worldMap[Math.floor(pX)][Math.floor(pY-dirY*moveSpeed)]) pY -= dirY*moveSpeed; }
+
+            // Move
+            let moveS = 0.05, rotS = 0.04;
+            if(keys['KeyW']) { if(!map[Math.floor(pX+pDir.x*moveS)][Math.floor(pY)]) pX += pDir.x*moveS; if(!map[Math.floor(pX)][Math.floor(pY+pDir.y*moveS)]) pY += pDir.y*moveS; }
+            if(keys['KeyS']) { if(!map[Math.floor(pX-pDir.x*moveS)][Math.floor(pY)]) pX -= pDir.x*moveS; if(!map[Math.floor(pX)][Math.floor(pY-pDir.y*moveS)]) pY -= pDir.y*moveS; }
             if(keys['KeyD']) {
-                let oldDirX = dirX; dirX = dirX * Math.cos(-rotSpeed) - dirY * Math.sin(-rotSpeed); dirY = oldDirX * Math.sin(-rotSpeed) + dirY * Math.cos(-rotSpeed);
-                let oldPlaneX = planeX; planeX = planeX * Math.cos(-rotSpeed) - planeY * Math.sin(-rotSpeed); planeY = oldPlaneX * Math.sin(-rotSpeed) + planeY * Math.cos(-rotSpeed);
+                let oldX = pDir.x; pDir.x = pDir.x*Math.cos(-rotS) - pDir.y*Math.sin(-rotS); pDir.y = oldX*Math.sin(-rotS) + pDir.y*Math.cos(-rotS);
+                let oldPX = pPlane.x; pPlane.x = pPlane.x*Math.cos(-rotS) - pPlane.y*Math.sin(-rotS); pPlane.y = oldPX*Math.sin(-rotS) + pPlane.y*Math.cos(-rotS);
             }
             if(keys['KeyA']) {
-                let oldDirX = dirX; dirX = dirX * Math.cos(rotSpeed) - dirY * Math.sin(rotSpeed); dirY = oldDirX * Math.sin(rotSpeed) + dirY * Math.cos(rotSpeed);
-                let oldPlaneX = planeX; planeX = planeX * Math.cos(rotSpeed) - planeY * Math.sin(rotSpeed); planeY = oldPlaneX * Math.sin(rotSpeed) + planeY * Math.cos(rotSpeed);
+                let oldX = pDir.x; pDir.x = pDir.x*Math.cos(rotS) - pDir.y*Math.sin(rotS); pDir.y = oldX*Math.sin(rotS) + pDir.y*Math.cos(rotS);
+                let oldPX = pPlane.x; pPlane.x = pPlane.x*Math.cos(rotS) - pPlane.y*Math.sin(rotS); pPlane.y = oldPX*Math.sin(rotS) + pPlane.y*Math.cos(rotS);
             }
 
-            // Shoot
-            if(keys['Space'] && recoil <= 0) {
-                recoil = 10;
-                // Check if enemy is in center view
-                let angleToEnemy = Math.atan2(enemy.y - pY, enemy.x - pX);
-                let pAngle = Math.atan2(dirY, dirX);
-                if(Math.abs(angleToEnemy - pAngle) < 0.2) {
-                    doomKills++; spawnEnemy();
-                    document.getElementById('doom-score').innerText = `Kills: ${doomKills}`;
-                }
+            if(keys['Space'] && dRecoil <= 0) {
+                dRecoil = 8;
+                let angleTo = Math.atan2(dEnemy.y - pY, dEnemy.x - pX);
+                let pAngle = Math.atan2(pDir.y, pDir.x);
+                if(Math.abs(angleTo - pAngle) < 0.15) { dKills++; spawnDoomEnemy(); }
             }
-            if(recoil > 0) recoil--;
+            if(dRecoil > 0) dRecoil--;
 
-            // Draw Background
             dCtx.fillStyle = '#222'; dCtx.fillRect(0,0,480,160);
             dCtx.fillStyle = '#444'; dCtx.fillRect(0,160,480,160);
 
-            // Raycast Walls
+            // Raycaster
             for(let x=0; x<480; x++) {
-                let cameraX = 2*x/480-1, rDirX = dirX + planeX*cameraX, rDirY = dirY + planeY*cameraX;
-                let mX = Math.floor(pX), mY = Math.floor(pY), dDX = Math.abs(1/rDirX), dDY = Math.abs(1/rDirY);
-                let stepX, stepY, sDX, sDY;
-                if(rDirX < 0) { stepX = -1; sDX = (pX-mX)*dDX; } else { stepX = 1; sDX = (mX+1-pX)*dDX; }
-                if(rDirY < 0) { stepY = -1; sDY = (pY-mY)*dDY; } else { stepY = 1; sDY = (mY+1-pY)*dDY; }
+                let camX = 2*x/480-1, rDirX = pDir.x + pPlane.x*camX, rDirY = pDir.y + pPlane.y*camX;
+                let mX = Math.floor(pX), mY = Math.floor(pY), dDX = Math.abs(1/rDirX), dDY = Math.abs(1/rDirY), sX, sY, sideDX, sideDY;
+                if(rDirX < 0) { sX = -1; sideDX = (pX-mX)*dDX; } else { sX = 1; sideDX = (mX+1-pX)*dDX; }
+                if(rDirY < 0) { sY = -1; sideDY = (pY-mY)*dDY; } else { sY = 1; sideDY = (mY+1-pY)*dDY; }
                 let hit=0, side;
-                while(hit==0){
-                    if(sDX < sDY){ sDX += dDX; mX += stepX; side=0; } else { sDY += dDY; mY += stepY; side=1; }
-                    if(worldMap[mX][mY]>0) hit=1;
+                while(!hit){
+                    if(sideDX < sideDY){ sideDX += dDX; mX += sX; side=0; } else { sideDY += dDY; mY += sY; side=1; }
+                    if(map[mX][mY]>0) hit=1;
                 }
-                let dist = side==0 ? (sDX-dDX) : (sDY-dDY);
+                let dist = side === 0 ? (sideDX-dDX) : (sideDY-dDY);
                 let h = Math.floor(320/dist);
-                dCtx.strokeStyle = side==1 ? '#600' : '#a00';
+                dCtx.strokeStyle = side === 1 ? '#600' : '#900';
                 dCtx.beginPath(); dCtx.moveTo(x, 160-h/2); dCtx.lineTo(x, 160+h/2); dCtx.stroke();
             }
 
-            // Draw Enemy (Simple Billboard)
-            let ex = enemy.x - pX, ey = enemy.y - pY;
-            let invDet = 1.0 / (planeX * dirY - dirX * planeY);
-            let tx = invDet * (dirY * ex - dirX * ey), ty = invDet * (-planeY * ex + planeX * ey);
+            // Enemy
+            let ex = dEnemy.x - pX, ey = dEnemy.y - pY;
+            let det = 1/(pPlane.x*pDir.y - pDir.x*pPlane.y), tx = det*(pDir.y*ex - pDir.x*ey), ty = det*(-pPlane.y*ex + pPlane.x*ey);
             if(ty > 0.1) {
-                let screenX = Math.floor((480 / 2) * (1 + tx / ty));
-                let size = Math.floor(Math.abs(320 / ty));
-                dCtx.fillStyle = 'red';
-                dCtx.beginPath(); dCtx.arc(screenX, 160, size/4, 0, Math.PI*2); dCtx.fill();
-                dCtx.fillStyle = 'white'; // Eye
-                dCtx.fillRect(screenX-size/20, 160-size/20, size/10, size/10);
+                let sx = Math.floor((480/2)*(1+tx/ty)), size = Math.floor(Math.abs(320/ty));
+                dCtx.fillStyle = '#f00'; dCtx.beginPath(); dCtx.arc(sx, 160, size/5, 0, Math.PI*2); dCtx.fill();
             }
 
-            // Draw Gun
-            dCtx.fillStyle = '#333';
-            dCtx.fillRect(210, 240 + recoil, 60, 80);
-            dCtx.fillStyle = '#111';
-            dCtx.fillRect(230, 200 + recoil, 20, 60);
+            // Gun
+            dCtx.fillStyle = '#333'; dCtx.fillRect(215, 250+dRecoil*2, 50, 70);
+            dCtx.fillStyle = '#111'; dCtx.fillRect(230, 220+dRecoil*2, 20, 50);
+            if(dRecoil > 5) { dCtx.fillStyle = 'orange'; dCtx.beginPath(); dCtx.arc(240, 210, 15, 0, Math.PI*2); dCtx.fill(); }
 
+            document.getElementById('doom-score').innerText = `Kills: ${dKills}`;
             loops.doom = requestAnimationFrame(updateDoom);
         }
 
-        // Initialize Tetris on load
-        window.onload = () => { /* wait for click */ };
     </script>
 </body>
 </html>
